@@ -1,0 +1,52 @@
+return {
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ui = {
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗",
+        },
+        border = "single",
+      },
+    },
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "williamboman/mason.nvim" },
+    opts = {
+      -- list of lsp for mason to install
+      ensure_installed = {
+        "html",
+        "cssls",
+        "eslint",
+        "jsonls",
+        "yamlls",
+        "tailwindcss",
+        "lua_ls",
+        "graphql",
+        "emmet_language_server",
+        "bashls",
+        "mdx_analyzer",
+        -- "gopls",
+        "marksman",
+        "vue_ls",
+        "vtsls",
+      },
+    },
+  },
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "williamboman/mason.nvim" },
+    opts = {
+      -- list of formatter and linter for mason to install
+      ensure_installed = {
+        "stylua", -- lua formatter
+        "shfmt", -- sh formatter with bash support
+      },
+    },
+  },
+}
