@@ -49,9 +49,9 @@ local function lsp_servers_component()
       ["emmet_language_server"] = "emmet",
       ["graphql"] = "gql",
       ["lua_ls"] = "lua",
-      ["tailwindcss"] = "tw",
+      -- ["tailwindcss"] = "tw",
       ["vtsls"] = "ts",
-      ["vue_ls"] = "vue",
+      -- ["vue_ls"] = "vue",
     }
     local name = n_tbl[client.name] or client.name
 

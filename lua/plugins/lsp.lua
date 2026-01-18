@@ -72,10 +72,16 @@ return {
     -- enable snippet
     capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+    -- local lspconfig_util = require("lspconfig.util")
+    -- local function git_root(fname)
+    --   return lspconfig_util.find_git_ancestor(fname) or lspconfig_util.path.dirname(fname)
+    -- end
+
     -- lsp server config
 
     -- html: disable wrap line
     vim.lsp.config("html", {
+      -- root_dir = git_root,
       settings = {
         html = {
           format = {
@@ -86,6 +92,7 @@ return {
     })
     -- json: validate using schema and pull from schemastore
     vim.lsp.config("jsonls", {
+      -- root_dir = git_root,
       settings = {
         json = {
           schemas = require("schemastore").json.schemas(),
@@ -95,6 +102,7 @@ return {
     })
     -- lua: recognize "vim" and "mp" global
     vim.lsp.config("lua_ls", {
+      -- root_dir = git_root,
       settings = {
         Lua = {
           diagnostics = {
@@ -106,6 +114,7 @@ return {
     })
 
     vim.lsp.config("vue_ls", {
+      -- root_dir = git_root,
       settings = {
         vue = {
           server = {
@@ -126,6 +135,7 @@ return {
     })
 
     vim.lsp.config("emmet_language_server", {
+      -- root_dir = git_root,
       filetypes = { "html", "css", "typescriptreact", "javascriptreact", "vue" },
     })
 

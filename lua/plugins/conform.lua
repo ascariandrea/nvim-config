@@ -10,7 +10,7 @@ return { -- Autoformat
       -- languages here or re-enable it for the disabled ones.
       local disable_filetypes = { c = true, cpp = true, sh = true }
       local lsp_format_opt
-      if disable_filetypes[vim.bo[bufnr].filetype] then
+      if disable_filetypes[vim.bo[bufnr].filetype] or vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
         lsp_format_opt = "never"
       else
         lsp_format_opt = "fallback"
@@ -25,23 +25,48 @@ return { -- Autoformat
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
-      -- You can use 'stop_after_first' to run the first available formatter from the list
-      -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      -- Run Prettier first, then ESLint (both sequentially). Add common JS/TS filetypes.
+      javascript = { "prettier", "eslint" },
+      javascriptreact = { "prettier", "eslint" },
+      typescript = { "prettier", "eslint" },
+      typescriptreact = { "prettier", "eslint" },
     },
   },
   config = function(_, opts)
     require("conform").setup(opts)
     -- Register the conform format command
-    vim.api.nvim_create_user_command("Format", function(args)
+    vim.api.nvim_create_user_command("Format", function(opts)
       local range = nil
-      if args.count ~= -1 then
-        local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+      if opts.range then
+        local start_line = opts.line1
+        local end_line_num = opts.line2
+        local end_line = vim.api.nvim_buf_get_lines(0, end_line_num - 1, end_line_num, true)[1] or ""
         range = {
-          start = { args.line1, 0 },
-          ["end"] = { args.line2, end_line:len() },
+          start = { start_line, 0 },
+          ["end"] = { end_line_num, #end_line },
         }
       end
+
       require("conform").format({ async = true, lsp_format = "fallback", range = range })
     end, { range = true })
+
+    vim.api.nvim_create_user_command("FormatDisable", function(args)
+      if args.bang then
+        -- FormatDisable! will disable formatting just for this buffer
+        vim.b.disable_autoformat = true
+      else
+        vim.g.disable_autoformat = true
+      end
+    end, {
+      desc = "Disable autoformat-on-save",
+      bang = true,
+    })
+
+    vim.api.nvim_create_user_command("FormatEnable", function()
+      vim.b.disable_autoformat = false
+      vim.g.disable_autoformat = false
+    end, {
+      desc = "Re-enable autoformat-on-save",
+    })
   end,
 }
