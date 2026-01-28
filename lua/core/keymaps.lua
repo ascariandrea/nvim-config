@@ -13,7 +13,6 @@ map("<leader>pl", "<cmd>Lazy<cr>", "Lazy")
 
 map("<leader>gb", "<cmd>Gitsigns blame_line<cr>", "Git Blame Line")
 map("<leader>gB", "<cmd>Gitsigns blame<cr>", "Git Blame")
-
 map("<leader>qo", function()
   vim.cmd("copen")
 end, "Open Quickfix List")
@@ -45,6 +44,25 @@ end, "Copilot Chat Close")
 map("<leader>tt", function()
   vim.cmd("terminal")
 end, "Open Terminal")
+
+vim.keymap.set(
+    'n',
+    '<leader>vt',
+    [[<cmd>vsplit | term<cr>A]],
+    { desc = 'Open terminal in vertical split' }
+)
+vim.keymap.set(
+    'n',
+    '<leader>ht',
+    [[<cmd>split | term<cr>A]],
+    { desc = 'Open terminal in horizontal split' }
+)
+vim.keymap.set(
+    't',
+    'jk',
+    '<C-\\><C-n>',
+    { desc = 'Use jk to enter in terminal normal mode' }
+)
 
 -- vim.api.nvim_create_user_command("ReloadColors", function()
 --   package.loaded["core.colorscheme.palette"] = nil

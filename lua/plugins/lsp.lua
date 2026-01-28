@@ -140,6 +140,7 @@ return {
     })
 
     vim.lsp.config("eslint", {
+      -- root_dir = git_root,
       filetypes = {
         "javascript",
         "javascriptreact",
@@ -150,5 +151,11 @@ return {
         "gql",
       },
     })
+
+    -- tailwindcss: disabled
+    -- vim.lsp.config("tailwindcss", {
+    --   -- root_dir = git_root,
+    --   filetypes = { "html", "css", "typescriptreact", "javascriptreact", "vue" },
+    -- })
   end,
 }
