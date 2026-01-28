@@ -140,7 +140,20 @@ return {
     })
 
     vim.lsp.config("eslint", {
-      -- root_dir = git_root,
+      root_dir = function(bufnr, on_dir)
+        local fname = vim.api.nvim_buf_get_name(bufnr)
+        local util = require("lspconfig.util")
+        -- Find nearest eslint.config.js (flat config) or legacy config files
+        local root = util.root_pattern(
+          "eslint.config.js",
+          "eslint.config.mjs",
+          "eslint.config.cjs",
+          ".eslintrc.js",
+          ".eslintrc.cjs",
+          ".eslintrc.json"
+        )(fname)
+        on_dir(root)
+      end,
       filetypes = {
         "javascript",
         "javascriptreact",
@@ -149,6 +162,9 @@ return {
         "vue",
         "graphql",
         "gql",
+      },
+      settings = {
+        workingDirectories = { mode = "auto" },
       },
     })
 
