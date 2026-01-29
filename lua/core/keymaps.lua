@@ -41,28 +41,10 @@ map("<leader>Cc", function()
   require("CopilotChat").close()
 end, "Copilot Chat Close")
 
-map("<leader>tt", function()
-  vim.cmd("terminal")
-end, "Open Terminal")
-
-vim.keymap.set(
-    'n',
-    '<leader>vt',
-    [[<cmd>vsplit | term<cr>A]],
-    { desc = 'Open terminal in vertical split' }
-)
-vim.keymap.set(
-    'n',
-    '<leader>ht',
-    [[<cmd>split | term<cr>A]],
-    { desc = 'Open terminal in horizontal split' }
-)
-vim.keymap.set(
-    't',
-    'jk',
-    '<C-\\><C-n>',
-    { desc = 'Use jk to enter in terminal normal mode' }
-)
+map("<leader>tt", "<cmd>terminal<cr>", "Open Terminal")
+map("<leader>tv", [[<cmd>vsplit | term<cr>A]], "Open terminal in vertical split")
+map("<leader>th", [[<cmd>split | term<cr>A]], "Open terminal in horizontal split")
+map("jk", "<C-\\><C-n>", "Exit terminal mode", "t")
 
 -- vim.api.nvim_create_user_command("ReloadColors", function()
 --   package.loaded["core.colorscheme.palette"] = nil

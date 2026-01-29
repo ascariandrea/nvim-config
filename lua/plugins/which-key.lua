@@ -14,7 +14,9 @@ return { -- Useful plugin to show you pending keybinds.
     },
 
     spec = {
+      { "<leader>a", group = "AI/Claude" },
       { "<leader>b", group = "Buffer" },
+      { "<leader>c", group = "Code" },
       { "<leader>C", group = "Copilot Chat" },
       { "<leader>d", group = "Diagnostics" },
       { "<leader>f", group = "Find" },
@@ -28,6 +30,7 @@ return { -- Useful plugin to show you pending keybinds.
       { "<leader>t", group = "Terminal" },
       { "<leader>q", group = "Quickfix" },
       { "<leader>w", group = "Window" },
+      { "<leader>x", group = "Trouble" },
     },
 
     ---@type wk.Win.opts
