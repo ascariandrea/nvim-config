@@ -32,3 +32,21 @@ require("lazy").setup({
   },
 })
 require("ui")
+
+local lspconfig = vim.lsp.config
+vim.lsp.enable("helm_ls")
+-- setup helm-ls
+lspconfig("helm_ls", {
+  settings = {
+    ["helm-ls"] = {
+      yamlls = {
+        path = "yaml-language-server",
+      },
+    },
+  },
+})
+
+-- enable yamlls
+vim.lsp.enable("yamlls")
+-- optional: configure yamlls options
+lspconfig("yamlls", {})
