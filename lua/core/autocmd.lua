@@ -22,6 +22,22 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Delete quickfix entry under cursor with dd
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    vim.keymap.set("n", "dd", function()
+      local items = vim.fn.getqflist()
+      local line = vim.fn.line(".")
+      table.remove(items, line)
+      vim.fn.setqflist(items, "r")
+      if #items > 0 then
+        vim.cmd(string.format("cc %d", math.min(line, #items)))
+      end
+    end, { buffer = true, silent = true })
+  end,
+})
+
 -- Disable copilot suggestion when BlinkCmp menu is open
 vim.api.nvim_create_autocmd("User", {
   pattern = "BlinkCmpMenuOpen",

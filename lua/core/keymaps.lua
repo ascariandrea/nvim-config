@@ -29,10 +29,6 @@ map("<leader>Z", function()
   require("snacks").zen()
 end, "Toggle Zen Mode")
 
-map("<leader>ld", function()
-  vim.diagnostic.open_float(nil, { focusable = true, scope = "cursor" })
-end, "Open Diagnostic Float")
-
 map("<leader>Co", function()
   require("CopilotChat").open()
 end, "Copilot Chat Prompts")
