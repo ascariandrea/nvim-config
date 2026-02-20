@@ -48,7 +48,7 @@ return {
     vim.api.nvim_command("set nofoldenable")
 
     vim.api.nvim_create_autocmd("FileType", {
-      pattern = parsers,
+      pattern = vim.list_extend(vim.deepcopy(parsers), { "typescriptreact" }),
       callback = function()
         vim.treesitter.start()
       end,

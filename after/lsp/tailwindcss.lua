@@ -1,7 +1,7 @@
 return {
---   settings = {
---     tailwindCSS = {
---       classFunctions = { "cva", "cx" },
---     },
---   },
+  settings = {
+    tailwindCSS = {
+      classFunctions = { "cva", "cx" },
+    },
+  },
 }

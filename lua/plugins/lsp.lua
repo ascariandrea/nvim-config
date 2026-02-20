@@ -168,10 +168,10 @@ return {
       },
     })
 
-    -- tailwindcss: disabled
-    -- vim.lsp.config("tailwindcss", {
-    --   -- root_dir = git_root,
-    --   filetypes = { "html", "css", "typescriptreact", "javascriptreact", "vue" },
-    -- })
+    -- tailwindcss
+    vim.lsp.config("tailwindcss", {
+      root_dir = git_root,
+      filetypes = { "html", "css", "typescriptreact", "javascriptreact", "vue" },
+    })
   end,
 }
